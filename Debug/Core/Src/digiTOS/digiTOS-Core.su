@@ -1,0 +1,5 @@
+digiTOS-Core.c:16:6:On_LEDs	8	static
+digiTOS-Core.c:21:6:Off_LEDs	8	static
+digiTOS-Core.c:26:6:BlinkLEDs	24	static
+digiTOS-Core.c:37:6:Check50Hz	8	static
+digiTOS-Core.c:63:6:EnableDebugMode	16	static

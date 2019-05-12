@@ -32,6 +32,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "digiTOS/digiTOS-IWDG.h"
+#include "digiTOS/digiTOS-Core.h"
+#include "digiTOS/digiTOS-50Hz.h"
+#include "digiTOS/digiTOS-DAC_Sinus.h"
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,6 +80,9 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
+	// Enable Debug
+	EnableDebugMode();
+
   /* USER CODE END 1 */
   
 
@@ -105,12 +114,37 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  	// Reset All to Default
+    DigiTOS_IWDG_Init(DigiTOS_IWDG_Timeout_16s);// WatchDog
+
+    BlinkLEDs(10,100);
+
+    UseSoftStart=1;
+    HAL_GPIO_EXTI_Callback(BLOCK_PU_Pin); // Get State of Block Pin
+
+    //PWM_50Hz_ON();
+    //PWM_50Hz_OFF();
+
+    DAC_SINUS_INIT();
+
+    Set50Hz();
+    //Set505Hz();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+	  if (BlockGenerator==1) {
+		  HAL_GPIO_WritePin(BOARD_LED_GPIO_Port, BOARD_LED_Pin,GPIO_PIN_SET); // LED Off
+	  }
+
+	  Check50Hz(); // Check if need to start\stop generator
+
+	  ResetWDG(); // Reset WatchDog
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -158,6 +192,17 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(GPIO_Pin==BLOCK_PU_Pin) {
+	  	  	  if (HAL_GPIO_ReadPin(BLOCK_PU_GPIO_Port, BLOCK_PU_Pin)==GPIO_PIN_RESET) {
+	  			  BlockGenerator=0; // Unblock Generator
+	  		  } else {
+	  			  BlockGenerator=1; //Block Generator
+	  		  }
+  }
+}
 
 /* USER CODE END 4 */
 

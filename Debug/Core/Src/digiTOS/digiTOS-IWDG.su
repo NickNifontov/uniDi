@@ -1,0 +1,2 @@
+digiTOS-IWDG.c:3:6:ResetWDG	8	static
+digiTOS-IWDG.c:8:9:DigiTOS_IWDG_Init	24	static
