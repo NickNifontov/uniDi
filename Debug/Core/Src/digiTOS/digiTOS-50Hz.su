@@ -1,5 +1,0 @@
-digiTOS-50Hz.c:27:6:Set50Hz	8	static
-digiTOS-50Hz.c:31:6:Set505Hz	8	static
-digiTOS-50Hz.c:35:10:SetDeadTime	16	static
-digiTOS-50Hz.c:201:6:PWM_50Hz_ON	8	static
-digiTOS-50Hz.c:212:6:PWM_50Hz_OFF	8	static

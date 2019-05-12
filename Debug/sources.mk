@@ -26,8 +26,6 @@ CPP_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Core/Src \
-Core/Src/digiTOS \
 Drivers/STM32F0xx_HAL_Driver/Src \
 Src \
 Startup \

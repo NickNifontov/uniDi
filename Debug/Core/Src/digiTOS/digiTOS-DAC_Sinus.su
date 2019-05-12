@@ -1,5 +1,0 @@
-digiTOS-DAC_Sinus.c:53:10:GetSinus	8	static
-digiTOS-DAC_Sinus.c:62:7:Set_DAC_SINUS_ZERO	8	static
-digiTOS-DAC_Sinus.c:66:7:DAC_SINUS_INIT	8	static
-digiTOS-DAC_Sinus.c:71:6:DAC_SINUS_ON	8	static
-digiTOS-DAC_Sinus.c:79:6:DAC_SINUS_OFF	8	static

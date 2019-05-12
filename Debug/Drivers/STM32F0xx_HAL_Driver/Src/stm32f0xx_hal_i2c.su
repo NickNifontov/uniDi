@@ -68,6 +68,6 @@ stm32f0xx_hal_i2c.c:4503:26:I2C_WaitOnTXISFlagUntilTimeout	24	static
 stm32f0xx_hal_i2c.c:4540:26:I2C_WaitOnSTOPFlagUntilTimeout	24	static
 stm32f0xx_hal_i2c.c:4574:26:I2C_WaitOnRXNEFlagUntilTimeout	24	static
 stm32f0xx_hal_i2c.c:4626:26:I2C_IsAcknowledgeFailed	24	static
-stm32f0xx_hal_i2c.c:4692:13:I2C_TransferConfig	32	static
+stm32f0xx_hal_i2c.c:4692:13:I2C_TransferConfig	40	static
 stm32f0xx_hal_i2c.c:4722:26:I2C_Enable_IRQ	24	static
 stm32f0xx_hal_i2c.c:4795:26:I2C_Disable_IRQ	24	static
