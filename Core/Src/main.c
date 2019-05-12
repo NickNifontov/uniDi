@@ -130,6 +130,8 @@ int main(void)
     Set50Hz();
     //Set505Hz();
 
+    StartADC();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

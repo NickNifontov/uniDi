@@ -35,9 +35,9 @@ Core/Src/digiTOS/digiTOS-50Hz.o: ../Core/Src/digiTOS/digiTOS-50Hz.c \
  ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h \
  ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h \
  ../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f051x8.h \
- ../Core/Src/digiTOS/digiTOS-Core.h \
+ ../Core/Src/digiTOS/digiTOS-Core.h ../Core/Inc/adc.h ../Core/Inc/main.h \
  ../Core/Src/digiTOS/digiTOS-DAC_Sinus.h ../Core/Inc/tim.h \
- ../Core/Inc/main.h ../Core/Inc/dac.h
+ ../Core/Inc/dac.h
 
 ../Core/Src/digiTOS/digiTOS-50Hz.h:
 
@@ -113,10 +113,12 @@ Core/Src/digiTOS/digiTOS-50Hz.o: ../Core/Src/digiTOS/digiTOS-50Hz.c \
 
 ../Core/Src/digiTOS/digiTOS-Core.h:
 
+../Core/Inc/adc.h:
+
+../Core/Inc/main.h:
+
 ../Core/Src/digiTOS/digiTOS-DAC_Sinus.h:
 
 ../Core/Inc/tim.h:
-
-../Core/Inc/main.h:
 
 ../Core/Inc/dac.h:

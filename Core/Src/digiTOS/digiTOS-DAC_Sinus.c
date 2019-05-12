@@ -51,7 +51,7 @@ volatile uint16_t sin_step=0;
 		 299, 274, 250, 225, 200, 175, 150, 125, 100, 76, 51, 26};
 
 uint16_t GetSinus() {
-	if ((sin_step>=SinRes) || (sin_step<=SINUS_MARGIN)|| (sin_step>=(SinRes-SINUS_MARGIN))) {
+	if ((sin_step>=SinRes) || (sin_step<=adcWienZero)|| (sin_step>=(SinRes-adcWienZero))) {
 
 		return 0;
 	}

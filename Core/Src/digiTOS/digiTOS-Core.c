@@ -13,6 +13,56 @@ volatile uint32_t BlockGenerator=1;
 volatile uint32_t IsGenerator=0;
 volatile uint32_t IsSinus=0;
 
+volatile uint16_t ADC_Data[ADC_ChannelCnt]; // ADC DMA's collected data
+volatile uint32_t ADC_Cnt=0;  // count of collected data to calculate average
+
+volatile uint32_t adcOC_V;
+volatile uint32_t adcOC_I;
+volatile uint32_t adcKlapan;
+volatile uint32_t adcPolka;
+volatile uint32_t adcWienZero;
+
+void ResetADC_Buff() {
+	for (int i=0;i<ADC_ChannelCnt;i++) {
+		ADC_Data[i]=0;
+	}
+	ADC_Cnt=0;
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc1)
+{
+	/*adcOC_V=adcOC_V+ADC_Data[0];
+	adcOC_I=adcOC_I+ADC_Data[2];
+	adcKlapan=adcKlapan+ADC_Data[3];
+	adcPolka=adcPolka+ADC_Data[4];
+	adcWienZero=adcWienZero+ADC_Data[5];*/
+	//
+		adcOC_V=ADC_Data[1];
+		adcOC_I=ADC_Data[2];
+		adcKlapan=ADC_Data[3];
+		adcPolka=ADC_Data[4];
+		adcWienZero=ADC_Data[5]/41;
+		//adcWienZero=10;
+
+	//
+	if (adcWienZero<SINUS_MARGIN) {
+		adcWienZero=SINUS_MARGIN;
+	}
+	//
+	ADC_Cnt++;
+	//
+	ResetADC_Buff();
+	StartADC();
+}
+
+
+
+void StartADC(){
+	//HAL_ADC_Start_IT(&hadc);
+	//ADC->CCR |= ADC_CCR_TSEN | ADC_CCR_VREFEN;
+	HAL_ADC_Start_DMA(&hadc,(uint32_t*) &ADC_Data,ADC_ChannelCnt);
+}
+
 void On_LEDs() {
 	HAL_GPIO_WritePin(BOARD_LED_GPIO_Port, BOARD_LED_Pin,GPIO_PIN_SET); // LED On
     HAL_GPIO_WritePin(POLKA_LED_GPIO_Port, POLKA_LED_Pin,GPIO_PIN_SET); // LED On
@@ -30,6 +80,7 @@ void BlinkLEDs(uint8_t _cnt, uint8_t _Delay) {
 		HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port, BOARD_LED_Pin);
 		HAL_GPIO_TogglePin(POLKA_LED_GPIO_Port, POLKA_LED_Pin);
 		HAL_Delay(_Delay);
+		_i++;
 	}
 	Off_LEDs();
 }

@@ -1,5 +1,8 @@
-digiTOS-Core.c:16:6:On_LEDs	8	static
-digiTOS-Core.c:21:6:Off_LEDs	8	static
-digiTOS-Core.c:26:6:BlinkLEDs	24	static
-digiTOS-Core.c:37:6:Check50Hz	8	static
-digiTOS-Core.c:63:6:EnableDebugMode	16	static
+digiTOS-Core.c:25:6:ResetADC_Buff	16	static
+digiTOS-Core.c:32:6:HAL_ADC_ConvCpltCallback	16	static
+digiTOS-Core.c:60:6:StartADC	8	static
+digiTOS-Core.c:66:6:On_LEDs	8	static
+digiTOS-Core.c:71:6:Off_LEDs	8	static
+digiTOS-Core.c:76:6:BlinkLEDs	24	static
+digiTOS-Core.c:88:6:Check50Hz	8	static
+digiTOS-Core.c:114:6:EnableDebugMode	16	static
