@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "tim.h"
+#include "digiTOS/digiTOS-50Hz.h"
 
 /* USER CODE BEGIN 0 */
 

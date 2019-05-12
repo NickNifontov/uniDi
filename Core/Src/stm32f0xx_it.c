@@ -236,9 +236,23 @@ void TIM2_IRQHandler(void)
   	 return;
     }
 
+
   	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1,DAC_ALIGN_12B_R,GetSinus());
 
   	sin_step++;
+
+					if (sin_step==1) {
+						HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port, BOARD_LED_Pin); // All is OK, blink
+						return;
+					}
+					if (sin_step==240) {
+  						CalcAvg();
+  						CurrentMargin=(adcWienZero_Avg/200)-1;
+  						if (CurrentMargin<SINUS_MARGIN) {
+  							CurrentMargin=SINUS_MARGIN;
+  						}
+  						return;
+  					}
 
   /* USER CODE END TIM2_IRQn 1 */
 }

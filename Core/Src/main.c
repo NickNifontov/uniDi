@@ -138,11 +138,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  if (BlockGenerator==1) {
-		  HAL_GPIO_WritePin(BOARD_LED_GPIO_Port, BOARD_LED_Pin,GPIO_PIN_SET); // LED Off
-	  }
-
 	  Check50Hz(); // Check if need to start\stop generator
 
 	  ResetWDG(); // Reset WatchDog

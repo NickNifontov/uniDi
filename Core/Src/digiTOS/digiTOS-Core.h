@@ -27,6 +27,7 @@ extern volatile uint32_t adcPolka;
 extern volatile uint32_t adcWienZero;
 
 extern volatile uint32_t adcWienZero_Avg;
+extern volatile uint32_t adcOC_V_Avg;
 
 extern volatile uint8_t CurrentMargin;
 
