@@ -22,11 +22,27 @@ volatile uint32_t adcKlapan;
 volatile uint32_t adcPolka;
 volatile uint32_t adcWienZero;
 
+volatile uint32_t adcWienZero_Avg;
+
+volatile uint8_t CurrentMargin=SINUS_MARGIN;
+
+
+
 void ResetADC_Buff() {
 	for (int i=0;i<ADC_ChannelCnt;i++) {
 		ADC_Data[i]=0;
 	}
+	//ADC_Cnt=0;
+}
+
+void CalcAvg() {
+	if (ADC_Cnt==0) {
+		adcWienZero_Avg=SINUS_MARGIN;
+	}
+	adcWienZero_Avg=(adcWienZero/ADC_Cnt);
+	//
 	ADC_Cnt=0;
+	adcWienZero=0;
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc1)
@@ -37,22 +53,18 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc1)
 	adcPolka=adcPolka+ADC_Data[4];
 	adcWienZero=adcWienZero+ADC_Data[5];*/
 	//
-		adcOC_V=ADC_Data[1];
-		adcOC_I=ADC_Data[2];
-		adcKlapan=ADC_Data[3];
-		adcPolka=ADC_Data[4];
-		adcWienZero=ADC_Data[5]/41;
+		adcOC_V=ADC_Data[0];
+		adcOC_I=ADC_Data[1];
+		adcKlapan=ADC_Data[2];
+		adcPolka=ADC_Data[3];
+		adcWienZero=adcWienZero+ADC_Data[4];
 		//adcWienZero=10;
 
-	//
-	if (adcWienZero<SINUS_MARGIN) {
-		adcWienZero=SINUS_MARGIN;
-	}
 	//
 	ADC_Cnt++;
 	//
 	ResetADC_Buff();
-	StartADC();
+	//StartADC();
 }
 
 
@@ -87,8 +99,16 @@ void BlinkLEDs(uint8_t _cnt, uint8_t _Delay) {
 
 void Check50Hz() {
 	if((BlockGenerator==0) && (IsGenerator==1)) {
+		if (TIM1->CNT==1000) {
+						CalcAvg();
+						CurrentMargin=adcWienZero_Avg/41;
+						if (CurrentMargin<SINUS_MARGIN) {
+							CurrentMargin=SINUS_MARGIN;
+						}
+		}
 		if (((TIM1->CNT==1000) || (TIM1->CNT==0)) || ((sin_step>100) && (TIM1->CNT<10))) {
 			sin_step=0;
+			//
 			HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port, BOARD_LED_Pin); // All is OK, blink
 			return;
 		}

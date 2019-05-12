@@ -26,10 +26,15 @@ extern volatile uint32_t adcKlapan;
 extern volatile uint32_t adcPolka;
 extern volatile uint32_t adcWienZero;
 
+extern volatile uint32_t adcWienZero_Avg;
+
+extern volatile uint8_t CurrentMargin;
+
 
 
 
 void StartADC();
+void CalcAvg();
 
 void EnableDebugMode();
 void Check50Hz();

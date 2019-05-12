@@ -14,7 +14,7 @@
 #include "tim.h"
 #include "dac.h"
 
-#define SINUS_MARGIN 10
+#define SINUS_MARGIN 3
 #define SinRes 480
 
 extern volatile uint16_t sin_data[SinRes];
